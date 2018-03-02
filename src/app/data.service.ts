@@ -1,8 +1,17 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map'; 
 
 @Injectable()
 export class DataService {
 
-  constructor() { }
+	result:any;
+
+  constructor(private_http: Http) { }
+
+  getPrices(){
+  	return this.http.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=ETH,DASH&tsyms=BTC,USD,EUR')
+  		.map(result => this.result = result.json());
+  }
 
 }
